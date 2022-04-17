@@ -1,0 +1,477 @@
+{
+  "pacs.004": [
+    {
+      " MessageElement/BuildingBlock<XML Tag>": "<PmtRtr>",
+      "Comentários": "Código da mensagem"
+    },
+    {
+      "Nível": 1,
+      " MessageElement/BuildingBlock<XML Tag>": "GroupHeader <GrpHdr>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Definição": "Set of characteristics shared by all individual transactions included in the status report message.",
+      "Comentários": "Conjunto de elementos do cabeçalho da mensagem"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "MessageIdentification <MsgId>",
+      "Nome no Brasil": "idMensagem",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Definition: Point to point reference, as assigned by the instructing party, and sent to the next party in the\r\nchain to unambiguously identify the message.\r\nUsage: The instructing party has to make sure that MessageIdentification is unique per instructed party for a pre-agreed period.",
+      "Comentários": "Identificação única de cada mensagem enviada",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão Mxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas). Considerando que:\r\n•  “M” – fixo (1 caractere); \r\n• xxxxxxxx – ISPB do emissor da mensagem  (8 caracteres numéricos [0-9]);\r\n• kkkkkkkkkkkkkkkkkkkkkkk – 23 caracteres alfanuméricos [a-z|A-Z|0-9];\r\nO participante direto do SPI deve garantir que o <MsgId> gerado por ele seja único, não se repetindo em qualquer outra mensagem enviada ao sistema."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "CreationDateTime <CreDtTm>",
+      "Nome no Brasil": "dataHoraCriacaoParaEmissao",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "DateTime",
+      "Tamanho no Brasil": "YYYY-MM-DD'T'hh:mm:ss.sss'Z'",
+      "Definição": "Date and time at which the message was created.",
+      "Comentários": "Data e hora de criação da mensagem pelo participante durante o processo de emissão ao sistema de liquidação, ou data e hora de criação da mensagem pelo sistema de liquidação durante o processo de emissão ao participante.",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão UTC (YYYY-MM-DD'T'hh:mm:ss.sss'Z')"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "NumberOfTransactions <NbOfTxs>",
+      "Nome no Brasil": "quantidadeTransacoes",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 15 caracteres numéricos",
+      "Definição": "Number of individual transactions contained in the message",
+      "Comentários": "Quantidade de instruções de devolução (transações) incluídas na mensagem.",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com o valor maior ou igual a \"1\"  (NbOfTxs >=1). A definição do número máximo de transações por mensagem será definido a posteriori."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "SettlementInformation <SttlmInf>",
+      "Nome no Brasil": "metodoLiquidacao",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Method used to settle the (batch of) payment instructions.",
+      "Comentários": "Conjunto de Elementos para indicar o Método usado para liquidar a devolução. ",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com a opção estabelecida na tabela de domínio."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "SettlementMethod <SttlmMtd>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Codeset"
+    },
+    {
+      "Nível": 1,
+      " MessageElement/BuildingBlock<XML Tag>": "TransactionInformation <TxInf>",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[1..*]",
+      "Definição": "Information concerning the original transactions, to which the return message refers.",
+      "Comentários": "Conjunto de elementos com Informações sobre as transações originais, às quais a mensagem de devolução  se refere."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "ReturnIdentification <RtrId>",
+      "Nome no Brasil": "idOperacao",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Unique identification, as assigned by an instructing party for an instructed party, to unambiguously identify the returned transaction.",
+      "Comentários": "Identificação única da devolução de transferência de recursos. ",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão DxxxxxxxxyyyyMMddHHmmkkkkkkkkkkk (32 caracteres), sendo:                                                                                                               \r\n•  “D” – fixo (1 caractere);\r\n• xxxxxxxx – identificação do agente que gerou o <RtrId>, podendo ser: o ISPB do participante direto ou o ISPB do participante indireto (8 caracteres numéricos [0-9]);\r\n• yyyyMMddHHmm – data, hora e minuto (12 caracteres) seguindo o horário UTC, da submissão da ordem de devolução ao sistema de liquidação. Aceita-se o preenchimento, pelo agente que gerou o <RtrId>, com uma tolerância máxima de 12 horas, para o futuro e para o passado, em relação ao horário efetivo de processamento da devolução pelo SPI;\r\n• kkkkkkkkkkk – sequencial criado pelo agente que gerou o <RtrId> (11 caracteres alfanuméricos [a-z|A-Z|0-9]). Deve ser único dentro de cada “yyyyMMddHHmm”.\r\n\r\nAdmite-se que o <Rtrld> seja gerado pelo participante direto ou pelo participante indireto. Ele deve ser único, não podendo ser repetido em qualquer outra operação enviada ao SPI."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "OriginalEndToEndIdentification <OrgnlEndToEndId>",
+      "Nome no Brasil": "idFimAFim",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Unique identification, as assigned by the original initiating party, to unambiguously identify the original transaction.",
+      "Comentários": "Identificação única do evento original (instrução de pagamento) utilizado em toda cadeia de processamento.",
+      "Regra para o Brasil": "Deve ser preenchido com o <EndToEndId> da pacs.008 original."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "ReturnedInterbankSettlementAmount\r\n<RtrdIntrBkSttlmAmt>",
+      "Nome no Brasil": "valor",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "ActiveCurrencyAndAmount",
+      "Tamanho no Brasil": "· Moeda: 3 caracteres  alfanuméricos e;                                                          · Valor:  Máximo 18 caracteres numéricos (2 casas decimais separados por ponto).",
+      "Definição": "Amount of money moved between the instructing agent and the instructed agent.\r\nNote: The decimal separator is a dot.",
+      "Comentários": "Valor da devolução",
+      "Regra para o Brasil": "O atributo Ccy é obrigatório e preenchido com \"BRL\""
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "SettlementPriority <SttlmPrty>",
+      "Nome no Brasil": "prioridadePagamento",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Codeset",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Indicator of the urgency or order of importance that the instructing party would like the instructed party to apply to the processing of the settlement instruction.",
+      "Comentários": "Indicador de liquidação prioritária ou não prioritária, na forma codificada.",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com a opção estabelecida na tabela de domínio."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "ChargeBearer <ChrgBr>",
+      "Nome no Brasil": "participanteTarifado",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Codeset",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Specifies which party/parties will bear the charges associated with the processing of the payment transaction.",
+      "Comentários": "Especifica qual parte / partes arcará(ão) com as cobranças associadas ao processamento da instrução de devolução. ",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com a opção estabelecida na tabela de domínio."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "ReturnReasonInformation <RtrRsnInf>",
+      "Nome no Brasil": "codigoDevolucao",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Provides detailed information on the return reason.",
+      "Comentários": "Conjunto de elementos que fornece informações detalhadas sobre o motivo da devolução. ",
+      "Regra para o Brasil": "Campo obrigatório. Deve ser preenchido com os códigos de erros estabelecidos na tabela de domínio - RTReason."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Reason <Rsn>",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Code <Cd>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "AdditionalInformation <AddtlInf>",
+      "Nome no Brasil": "motivoDevolucao",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 105 caracteres alfanuméricos",
+      "Definição": "Further details on the return reason.",
+      "Comentários": "Descrição adicional do motivo da devolução.",
+      "Regra para o Brasil": "Campo opcional de texto livre até 105 caracteres. "
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "OriginalTransactionReference <OrgnlTxRef>",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Key elements used to identify the original transaction that is being referred to.",
+      "Comentários": "Elementos chave utilizados para identificar a transação original que está sendo referenciada."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "RemittanceInformation <RmtInf>",
+      "Nome no Brasil": "informacoesEntreUsuarios",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "Máximo 140 caracteres alfanuméricos",
+      "Definição": "Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivable system, in an unstructured form.",
+      "Comentários": "Conjunto de elementos usado para envio de informações entre usuário pagador e usuário recebedor. ",
+      "Regra para o Brasil": "Campo opcional com preenchimento livre até 140 caracteres. Deve obrigatoriamente ser preenchido sempre que o usuário debitado acrescentar algum texto descritivo na ordem de devolução."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Unstructured <Ustrd>",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "DebtorAgent <DbtrAgt>",
+      "Nome no Brasil": "participanteDoUsuarioPagador",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "8 caracteres numéricos",
+      "Definição": "Financial institution servicing an account for the debtor.\r\nSpecifies the details to identify a financial institution",
+      "Comentários": "Conjunto de elementos usado para identificar o participante emissor da ordem de devolução - participante no qual o usuário que comandou a devolução detém a conta transacional. Caso o participante emissor da ordem de devolução seja Participante Indireto do SPI, a busca da identificação do seu Liquidante será realizada por procedimento do SPI.",
+      "Regra para o Brasil": "Deve ser preenchido com o ISPB do participante direto ou indireto do SPI, conforme o caso, no qual o usuário a ser debitado da ordem de devolução detém a conta transacional."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "FinancialInstitutionIdentification <FinInstnId>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "ClearingSystemMemberIdentification <ClrSysMmbId>",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "MemberIdentification <MmbId>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "CreditorAgent <CdtrAgt>",
+      "Nome no Brasil": "participanteDoUsuarioRecebedor",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "8 caracteres numéricos",
+      "Definição": "Financial institution servicing an account for the creditor.\r\nSpecifies the details to identify a financial institution",
+      "Comentários": "Conjunto de elementos usado para identificar o participante destinatário da ordem de devolução - participante no qual o usuário que será creditado pela devolução detém a conta transacional. Caso o participante destinatário da ordem de devolução seja Participante Indireto do SPI, a busca da identificação do seu Liquidante será realizada por procedimento do SPI.",
+      "Regra para o Brasil": "Deve ser preenchido com o ISPB do participante direto ou indireto do SPI, conforme o caso, no qual o usuário a ser creditado da ordem de devolução detém a conta transacional."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "FinancialInstitutionIdentification <FinInstnId>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "ClearingSystemMemberIdentification <ClrSysMmbId>",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "MemberIdentification <MmbId>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    }
+  ],
+  "Exemplo de uso": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<PmtRtr>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": "<MsgId>M00038166dfg4frgh342434234324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2020-12-06T16:00:05.476Z</CreDtTm>"
+    },
+    {
+      "__EMPTY_1": "<NbOfTxs>1</NbOfTxs>"
+    },
+    {
+      "__EMPTY_1": "<SttlmInf>"
+    },
+    {
+      "__EMPTY_2": "<SttlmMtd>CLRG</SttlmMtd>"
+    },
+    {
+      "__EMPTY_1": "</SttlmInf>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": " <TxInf>"
+    },
+    {
+      "__EMPTY_1": "<RtrId>D11111111201907261559y6j6mt9l0pi</RtrId>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlEndToEndId>E11111111201907261559y6j6mt9l0pi</OrgnlEndToEndId>"
+    },
+    {
+      "__EMPTY_1": "<RtrdIntrBkSttlmAmt Ccy=\"BRL\">58770.23</RtrdIntrBkSttlmAmt>"
+    },
+    {
+      "__EMPTY_1": "<SttlmPrty>HIGH</SttlmPrty>"
+    },
+    {
+      "__EMPTY_1": "<ChrgBr>SLEV</ChrgBr>"
+    },
+    {
+      "__EMPTY_1": "<RtrRsnInf>"
+    },
+    {
+      "__EMPTY_2": " <Rsn>"
+    },
+    {
+      "__EMPTY_3": "<Cd>BE08</Cd>"
+    },
+    {
+      "__EMPTY_2": " </Rsn>"
+    },
+    {
+      "__EMPTY_1": "</RtrRsnInf>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlTxRef>"
+    },
+    {
+      "__EMPTY_2": "<DbtrAgt>"
+    },
+    {
+      "__EMPTY_3": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_4": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_5": "<MmbId>11111111</MmbId>"
+    },
+    {
+      "__EMPTY_4": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_3": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_2": "</DbtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<CdtrAgt>"
+    },
+    {
+      "__EMPTY_3": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_4": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_5": "<MmbId>00038166</MmbId>"
+    },
+    {
+      "__EMPTY_4": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_3": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_2": "</CdtrAgt>"
+    },
+    {
+      "__EMPTY_1": "</OrgnlTxRef>"
+    },
+    {
+      "__EMPTY": " </TxInf>"
+    },
+    {
+      "Legenda:": "</PmtRtr>"
+    }
+  ],
+  "Tabela de Domínio - RTReason": [
+    {
+      "Mensagem ISO 20022": "Message Element",
+      "Domínios RTReason para o Brasil": "Códigos de Devolução",
+      "__EMPTY": "Nome do Motivo de Devolução",
+      "__EMPTY_1": "Descrição do Motivo de Devolução",
+      "__EMPTY_2": "Comentários",
+      "__EMPTY_3": "Fonte de referência"
+    },
+    {
+      "Mensagem ISO 20022": " <RtrRsnInf>  ReturnReasonInformation",
+      "Domínios RTReason para o Brasil": "BE08",
+      "__EMPTY": "BankError",
+      "__EMPTY_1": "Returned as a result of a bank error.",
+      "__EMPTY_2": "Devolução de pagamento iniciada pelo participante do usuário recebedor no âmbito do Mecanismo Especial de Devolução. Deve ser preenchido sempre que uma solicitação de devolução for iniciada pelo participante do usuário pagador com o motivo “falha operacional do PSP do pagador” ou sempre que a devolução for iniciada pelo participante do usuário recebedor por falha operacional em seus próprios sistemas.",
+      "__EMPTY_3": "ExternalReturnReason1Code"
+    },
+    {
+      "Mensagem ISO 20022": "<Rsn> Reason",
+      "Domínios RTReason para o Brasil": "FR01",
+      "__EMPTY": "Fraud",
+      "__EMPTY_1": "Returned as a result of fraud.",
+      "__EMPTY_2": "Devolução de pagamento, iniciada pelo participante do usuário recebedor no âmbito do Mecanismo Especial de Devolução, motivada por fundada suspeita de fraude. Deve ser preenchido sempre que uma solicitação de devolução for iniciada pelo participante do usuário pagador com o motivo “fundada suspeita de fraude” ou sempre que a devolução for iniciada pelo participante do usuário recebedor por fundada suspeita de fraude."
+    },
+    {
+      "Mensagem ISO 20022": "<Cd> Code",
+      "Domínios RTReason para o Brasil": "MD06",
+      "__EMPTY": "RefundRequestByEndCustomer",
+      "__EMPTY_1": "Return of funds requested by end customer",
+      "__EMPTY_2": "Devolução de pagamento solicitado pelo usuário recebedor."
+    },
+    {
+      "Domínios RTReason para o Brasil": "SL02",
+      "__EMPTY": "SpecificServiceOfferedByCreditorAgent",
+      "__EMPTY_1": "Due to specific service offered by the Creditor Agent",
+      "__EMPTY_2": "Devolução de pagamento solicitada pelo usuário recebedor motivada por um erro na transação ou desacordo entre as partes relacionados ao Pix Saque ou ao Pix Troco."
+    }
+  ],
+  "Tabela de Domínio": [
+    {
+      "Mensagem ISO 20022": "Message Element",
+      "Domínios para o Brasil": "Código",
+      "__EMPTY_1": "Nome",
+      "__EMPTY_2": "Descrição",
+      "__EMPTY_3": "Comentários",
+      "__EMPTY_4": "Fonte de referência"
+    },
+    {
+      "Mensagem ISO 20022": "<SttlmInf> SettlementInformation",
+      "Domínios para o Brasil": "CLRG",
+      "__EMPTY_1": "ClearingSystem",
+      "__EMPTY_2": "Settlement is done through a payment clearing system.",
+      "__EMPTY_3": "Método de liquidação por intermédio do sistema de pagamentos instantâneos(SPI)",
+      "__EMPTY_4": "SettlementMethod1Code"
+    },
+    {
+      "Mensagem ISO 20022": " <SttlmMtd> SettlementMethod"
+    },
+    {
+      "Mensagem ISO 20022": "<SttlmPrty> SettlementPriority",
+      "Domínios para o Brasil": "HIGH",
+      "__EMPTY_1": "High",
+      "__EMPTY_2": "Priority level is high.",
+      "__EMPTY_3": "Liquidação Prioritária. Deve ser utilizado quando o usuário recebedor do pagamento original solicita o envio imediato da devolução. ",
+      "__EMPTY_4": "Priority3Code"
+    },
+    {
+      "Domínios para o Brasil": "NORM",
+      "__EMPTY_1": "Normal",
+      "__EMPTY_2": "Priority level is normal.",
+      "__EMPTY_3": "Liquidação Não Prioritária. Deve ser utilizado quando o usuário recebedor do pagamento original solicita que o envio da devolução seja postergado ou quando o PSP emissor da ordem de devolução necessita, justificadamente, atrasar a devolução dos valores do pagamento devido aos processos internos de prevenção à fraude. "
+    },
+    {
+      "Mensagem ISO 20022": "<ChrgBr> ChargeBearer",
+      "Domínios para o Brasil": "SLEV",
+      "__EMPTY_1": "FollowingServiceLevel",
+      "__EMPTY_2": "Charges are to be applied following the rules agreed in the service level and/or scheme.",
+      "__EMPTY_3": "As cobranças devem ser aplicadas de acordo com as regras acordadas no nível de serviço.",
+      "__EMPTY_4": "ChargeBearerType1Code"
+    }
+  ]
+}
