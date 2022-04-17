@@ -1,0 +1,694 @@
+{
+  "pacs.002": [
+    {
+      " MessageElement/BuildingBlock<XML Tag>": "<FIToFIPmtStsRpt>",
+      "Comentários": "Código da mensagem"
+    },
+    {
+      "Nível": 1,
+      " MessageElement/BuildingBlock<XML Tag>": "GroupHeader <GrpHdr>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Definição": "Set of characteristics shared by all individual transactions included in the status report message.",
+      "Comentários": "Conjunto de elementos do cabeçalho da mensagem"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "MessageIdentification <MsgId>",
+      "Nome no Brasil": "idMensagem",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Definition: Point to point reference, as assigned by the instructing party, and sent to the next party in the\r\nchain to unambiguously identify the message.\r\nUsage: The instructing party has to make sure that MessageIdentification is unique per instructed party for a pre-agreed period.",
+      "Comentários": "Identificação única de cada mensagem enviada",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão Mxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas). Considerando que:\r\n•  “M” – fixo (1 caractere); \r\n• xxxxxxxx – ISPB do emissor da mensagem  (8 caracteres numéricos [0-9]);\r\n• kkkkkkkkkkkkkkkkkkkkkkk – 23 caracteres alfanuméricos [a-z|A-Z|0-9];\r\nO participante direto do SPI deve garantir que o <MsgId> gerado por ele seja único, não se repetindo em qualquer outra mensagem enviada ao sistema."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "CreationDateTime <CreDtTm>",
+      "Nome no Brasil": "dataHoraCriacaoParaEmissao",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "DateTime",
+      "Tamanho no Brasil": "YYYY-MM-DD'T'hh:mm:ss.sss'Z'",
+      "Definição": "Date and time at which the message was created.",
+      "Comentários": "Data e hora de criação da mensagem pelo participante durante o processo de emissão ao sistema de liquidação, ou data e hora de criação da mensagem pelo sistema de liquidação durante o processo de emissão ao participante.",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão UTC (YYYY-MM-DD'T'hh:mm:ss.sss'Z')"
+    },
+    {
+      "Nível": 1,
+      " MessageElement/BuildingBlock<XML Tag>": "TransactionInformationAndStatus <TxInfAndSts>",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[1..*]",
+      "Definição": "Information concerning the original transactions, to which the status report message refers.",
+      "Comentários": "Conjunto de elementos com Informações sobre as transações originais, às quais a mensagem do relatório de status se refere.",
+      "Regra para o Brasil": "Campo Obrigatório."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "OriginalInstructionIdentification <OrgnlInstrId>",
+      "Nome no Brasil": "idInstrucaoOriginal",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Unique identification, as assigned by the original instructing party for the original instructed party, to unambiguously identify the original instruction.",
+      "Comentários": "Identificação única da instrução de pagamento ou de sua devolução.",
+      "Regra para o Brasil": "O campo deve ser preenchido com o:\r\n• EndToEndIdentification <EndToEndId> da pacs.008 original,  caso a resposta for originada de uma mensagem de instrução de pagamento, ou;                                                                                                                                  • ReturnIdentification <RtrId> da pacs.004 original, caso a resposta for originada de uma mensagem de devolução."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "OriginalEndToEndIdentification <OrgnlEndToEndId>",
+      "Nome no Brasil": "idFimAFimOriginal",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "unambiguously identify the reported status.",
+      "Comentários": "Identificação única do evento. Esse número é usado em toda a cadeia de mensagens de uma instrução de pagamento ou de sua devolução. ",
+      "Regra para o Brasil": "O campo deve ser preenchido com o <EndToEndId> da mensagem original (pacs.008 ou pacs.004)."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "TransactionStatus <TxSts>",
+      "Nome no Brasil": "situacaoDaTransacao",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Specifies the status of a transaction, in a coded form.",
+      "Comentários": "Especifica o status de uma transação, em um formato codificado.",
+      "Regra para o Brasil": "Deve ser preenchido com uma das opções estabelecidas na tabela de domínios -TxSts."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "StatusReasonInformation <StsRsnInf>",
+      "Nome no Brasil": "codigoDeErro",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[0..*]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Provides detailed information on the status reason.",
+      "Comentários": "Conjunto de elementos que fornece informações detalhadas sobre o motivo do status, caso o status não seja positivo. ",
+      "Regra para o Brasil": "Campo opcional. Deve ser preenchido com os códigos de erros estabelecidas na tabela de domínios - Reason."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Reason <Rsn>",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Code <Cd>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "AdditionalInformation <AddtlInf>",
+      "Nome no Brasil": "detalhamentoDoErro",
+      " Mult. ISO ": "[0..*]",
+      "Mult. Brasil": "[0..*]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 105 caracteres alfanuméricos",
+      "Definição": "Further details on the status reason",
+      "Comentários": "Informações complementares sobre o motivo do status",
+      "Regra para o Brasil": "Campo opcional. Deve ser preenchido com informações adicionais sobre o erro ocorrido."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "EffectiveInterbankSettlementDate <FctvIntrBkSttlmDt>",
+      "Nome no Brasil": "dataHoraLiquidacao",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "YYYY-MM-DD'T'hh:mm:ss.sss'Z'",
+      "Definição": "Date and time at which a transaction is completed and cleared, that is, payment is effected.",
+      "Comentários": "Conjunto de elementos usado para informar a data e o horário da efetiva liquidação, caso ela tenha ocorrido.",
+      "Regra para o Brasil": "Campo opcional usado somente pelo SPI  após efetiva liquidação da instrução de pagamento. Não deve ser preenchido pelos participantes. Data-hora no formato padrão UTC (YYYY-MM-DD'T'hh:mm:ss.sss'Z')."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "DateTime <DtTm>",
+      " Mult. ISO ": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "DateTime"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "OriginalTransactionReference <OrgnlTxRef>",
+      "Nome no Brasil": "dataContabil",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "YYYY-MM-DD",
+      "Definição": "Key elements used to identify the original transaction that is being referred to.",
+      "Comentários": "Conjunto de Elementos usados ​​para identificar a Data do Movimento Contábil ",
+      "Regra para o Brasil": "Campo opcional usado somente pelo SPI, para informar a data em que a instrução de pagamento foi contabilizada. Não deve ser preenchido pelos participantes. Data no formato padrão YYYY-MM-DD."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "InterbankSettlementDate <IntrBkSttlmDt>",
+      " Mult. ISO ": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Date"
+    }
+  ],
+  "Exemplo resposta do PSP Credor": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00038166dfg4frgh342434234324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:05.476Z</CreDtTm>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": " <TxInfAndSts>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlInstrId>E00038166201907261559y6j6mt9l0pi</OrgnlInstrId>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlEndToEndId>E00038166201907261559y6j6mt9l0pi</OrgnlEndToEndId>"
+    },
+    {
+      "__EMPTY_1": "<TxSts>ACSP </TxSts>"
+    },
+    {
+      "__EMPTY": " </TxInfAndSts>"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    }
+  ],
+  "Exemplo de resposta do SPI": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00044555dfg4frgh242434884324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:08.230Z</CreDtTm>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": " <TxInfAndSts>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlInstrId>E00038166201907261559y6j6mt9l0pi</OrgnlInstrId>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlEndToEndId>E00038166201907261559y6j6mt9l0pi</OrgnlEndToEndId>"
+    },
+    {
+      "__EMPTY_1": "<TxSts>ACCC </TxSts>"
+    },
+    {
+      "__EMPTY_1": "<FctvIntrBkSttlmDt>"
+    },
+    {
+      "__EMPTY_2": " <DtTm> 2019-07-26T16:00:07.510Z</DtTm> "
+    },
+    {
+      "__EMPTY_1": "</FctvIntrBkSttlmDt>"
+    },
+    {
+      "__EMPTY_1": " <OrgnlTxRef>"
+    },
+    {
+      "__EMPTY_2": "<IntrBkSttlmDt> 2019-07-26 </IntrBkSttlmDt>"
+    },
+    {
+      "__EMPTY_1": " </OrgnlTxRef>"
+    },
+    {
+      "__EMPTY": " </TxInfAndSts>"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    }
+  ],
+  "Exemplo de resposta com Erro": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00032779dfg4frgh342434234324ggo</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:08.200Z</CreDtTm>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": " <TxInfAndSts>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlInstrId>E00038166201907261559y6j6mt9l0pi</OrgnlInstrId>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlEndToEndId>E00029433201907261559y6j6mt9l0ht</OrgnlEndToEndId>"
+    },
+    {
+      "__EMPTY_1": "<TxSts>RJCT </TxSts>"
+    },
+    {
+      "__EMPTY_1": "<StsRsnInf>"
+    },
+    {
+      "__EMPTY_2": "<Rsn>"
+    },
+    {
+      "__EMPTY_3": "<Cd>AB03</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Rsn>"
+    },
+    {
+      "__EMPTY_1": "</StsRsnInf>"
+    },
+    {
+      "__EMPTY": " </TxInfAndSts>"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    }
+  ],
+  "Exemplo de resposta devolução": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00044555dfg4frgh242434884324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:08.230Z</CreDtTm>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": " <TxInfAndSts>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlInstrId>D00038166201907261559y6j6mt9l0pi</OrgnlInstrId>"
+    },
+    {
+      "__EMPTY_1": "<OrgnlEndToEndId>E00038166201907261559y6j6mt9l0pi</OrgnlEndToEndId>"
+    },
+    {
+      "__EMPTY_1": "<TxSts>ACCC </TxSts>"
+    },
+    {
+      "__EMPTY_1": "<FctvIntrBkSttlmDt>"
+    },
+    {
+      "__EMPTY_2": " <DtTm> 2019-07-26T16:00:07.510Z</DtTm> "
+    },
+    {
+      "__EMPTY_1": "</FctvIntrBkSttlmDt>"
+    },
+    {
+      "__EMPTY_1": " <OrgnlTxRef>"
+    },
+    {
+      "__EMPTY_2": "<IntrBkSttlmDt> 2019-07-26 </IntrBkSttlmDt>"
+    },
+    {
+      "__EMPTY_1": " </OrgnlTxRef>"
+    },
+    {
+      "__EMPTY": " </TxInfAndSts>"
+    },
+    {
+      "Legenda:": "<FIToFIPmtStsRpt>"
+    }
+  ],
+  "Tabela de Domínios - TxSts": [
+    {
+      "Mensagem ISO 20022": "Message Element",
+      "Domínios TransactionStatus para o Brasil": "Código",
+      "__EMPTY": "Nome",
+      "__EMPTY_1": "Descrição",
+      "__EMPTY_2": "Comentários",
+      "__EMPTY_3": "Fonte de referência"
+    },
+    {
+      "Mensagem ISO 20022": " <TxSts>  TransactionStatus",
+      "Domínios TransactionStatus para o Brasil": "ACCC",
+      "__EMPTY": "AcceptedSettlementCompleted",
+      "__EMPTY_1": "Settlement on the creditor's account has been completed.",
+      "__EMPTY_2": "Notificação do SPI da conclusão da transação ao participante do usuário recebedor.",
+      "__EMPTY_3": "ExternalPaymentTransactionStatus1Code"
+    },
+    {
+      "Domínios TransactionStatus para o Brasil": "ACSC",
+      "__EMPTY": "AcceptedSettlementCompletedDebitorAccount",
+      "__EMPTY_1": "Settlement completed.\r\nUsage : this can be used by a Market Infrastructure reporting to Infrastructure Participant or an Account Servicer to Account Owner to report that the transaction account entry has been completed. ",
+      "__EMPTY_2": "Notificação do SPI da conclusão da transação ao participante do usuário pagador. "
+    },
+    {
+      "Domínios TransactionStatus para o Brasil": "ACSP",
+      "__EMPTY": "AcceptedSettlementInProcess",
+      "__EMPTY_1": "All preceding checks such as technical validation and customer profile were successful and therefore the payment instruction has been accepted for execution.",
+      "__EMPTY_2": "Prosseguimento de instrução de pagamento após as validação realizadas pelo participante do usuário recebedor."
+    },
+    {
+      "Domínios TransactionStatus para o Brasil": "RJCT",
+      "__EMPTY": "Rejected",
+      "__EMPTY_1": "Payment instruction has been rejected.",
+      "__EMPTY_2": "Instrução de pagamento/devolução rejeitada pelo SPI / participante do usuário recebedor por erro de negócio"
+    }
+  ],
+  "Tabela de Domínios - Reason": [
+    {
+      "Mensagem ISO 20022": "Message Element",
+      "Domínios Reason para o Brasil": "Códigos de Erro",
+      "__EMPTY": "Nome do Erro",
+      "__EMPTY_1": "Descrição do Erro",
+      "__EMPTY_2": "Participante que gera o Erro",
+      "__EMPTY_3": "Comentários",
+      "__EMPTY_4": "Fonte de referência"
+    },
+    {
+      "Domínios Reason para o Brasil": "AB03",
+      "__EMPTY": "AbortedSettlementTimeout",
+      "__EMPTY_1": "Settlement aborted due to timeout.   ",
+      "__EMPTY_2": "SPI ",
+      "__EMPTY_3": "Liquidação da transação interrompida devido a timeout no SPI.",
+      "__EMPTY_4": "ExternalStatusReason1Code"
+    },
+    {
+      "Domínios Reason para o Brasil": "AB09",
+      "__EMPTY": "ErrorCreditorAgent",
+      "__EMPTY_1": "Transaction stopped due to error at the Creditor Agent.",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Transação interrompida devido a erro no participante do usuário recebedor."
+    },
+    {
+      "Domínios Reason para o Brasil": "AB11",
+      "__EMPTY": "TimeoutDebtorAgent",
+      "__EMPTY_1": "Transaction stopped due to timeout at the Debtor Agent.",
+      "__EMPTY_2": "SPI ",
+      "__EMPTY_3": "Timeout do participante emissor da ordem de pagamento."
+    },
+    {
+      "Domínios Reason para o Brasil": "AC03",
+      "__EMPTY": "InvalidCreditorAccountNumber",
+      "__EMPTY_1": "Creditor account number invalid or missing",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Número da conta transacional do usuário recebedor inexistente ou inválido."
+    },
+    {
+      "Domínios Reason para o Brasil": "AC06",
+      "__EMPTY": "BlockedAccount",
+      "__EMPTY_1": "Account specified is blocked, prohibiting posting of transactions against it.",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Conta transacional do usuário recebedor encontra-se bloqueada."
+    },
+    {
+      "Domínios Reason para o Brasil": "AC07",
+      "__EMPTY": "ClosedCreditorAccountNumber",
+      "__EMPTY_1": "Creditor account number closed",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Número da conta transacional do usuário recebedor encerrada."
+    },
+    {
+      "Domínios Reason para o Brasil": "AC14",
+      "__EMPTY": "InvalidCreditorAccountType",
+      "__EMPTY_1": "Creditor account type missing or invalid",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Tipo incorreto para a conta transacional do usuário recebedor."
+    },
+    {
+      "Domínios Reason para o Brasil": "AG03",
+      "__EMPTY": "TransactionNotSupported",
+      "__EMPTY_1": "Transaction type not supported/authorized on this account ",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Tipo de transação não é suportado/autorizado na conta transacional do usuário recebedor. Exemplo: transferência para conta salário."
+    },
+    {
+      "Domínios Reason para o Brasil": "AG12",
+      "__EMPTY": "NotAllowedBookTransfer",
+      "__EMPTY_1": "Payment orders made by transferring funds from one account to another at the same financial institution (bank or payment institution) are not allowed.",
+      "__EMPTY_2": "SPI ",
+      "__EMPTY_3": "Não é permitida ordem de pagamento/devolução no SPI cujos recursos sejam transferidos de uma conta transacional para outra em uma mesma instituição participante ou entre participantes que utilizem o serviço de liquidação de um mesmo participante liquidante no SPI (booktransfer)."
+    },
+    {
+      "Domínios Reason para o Brasil": "AG13",
+      "__EMPTY": "ForbiddenReturnPayment",
+      "__EMPTY_1": "Returned payments derived from previously returned transactions are not allowed.",
+      "__EMPTY_2": "SPI ",
+      "__EMPTY_3": "Não é permitido devolver a devolução de um pagamento instantâneo."
+    },
+    {
+      "Domínios Reason para o Brasil": "AGNT",
+      "__EMPTY": "IncorrectAgent",
+      "__EMPTY_1": "Agent in the payment workflow is incorrect",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Participante direto não é liquidante do participante do usuário pagador."
+    },
+    {
+      "Domínios Reason para o Brasil": "AM01",
+      "__EMPTY": "ZeroAmount",
+      "__EMPTY_1": "Specified message amount is equal to zero",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Ordem de pagamento instantâneo com valor zero."
+    },
+    {
+      "Domínios Reason para o Brasil": "AM02",
+      "__EMPTY": "NotAllowedAmount",
+      "__EMPTY_1": "Specific transaction/message amount is greater than allowed maximum",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Ordem de pagamento/devolução em valor que faz superar o limite permitido para o tipo de conta transacional creditada."
+    },
+    {
+      "Mensagem ISO 20022": " <StsRsnInf> StatusReasonInformation",
+      "Domínios Reason para o Brasil": "AM04",
+      "__EMPTY": "InsufficientFunds",
+      "__EMPTY_1": "Amount of funds available to cover specified message amount is insufficient.",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Saldo insuficiente na conta PI do participante do usuário pagador."
+    },
+    {
+      "Mensagem ISO 20022": "<Rsn> Reason",
+      "Domínios Reason para o Brasil": "AM09",
+      "__EMPTY": "WrongAmount",
+      "__EMPTY_1": "Amount received is not the amount agreed or expected",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Devolução de pagamento em valor que faz superar o valor da ordem de pagamento instantâneo correspondente."
+    },
+    {
+      "Domínios Reason para o Brasil": "AM12",
+      "__EMPTY": "InvalidAmount",
+      "__EMPTY_1": "Amount is invalid or missing",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Divergência entre a somatória dos valores do bloco ‘valorDoDinheiroOuCompra’ e o campo ‘valor’."
+    },
+    {
+      "Mensagem ISO 20022": "<Cd> Code",
+      "Domínios Reason para o Brasil": "AM18",
+      "__EMPTY": "InvalidNumberOfTransactions",
+      "__EMPTY_1": "Number of transactions is invalid or missing. Generic usage if cannot specify between group and payment information levels.",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Quantidade de transações inválida."
+    },
+    {
+      "Domínios Reason para o Brasil": "BE01",
+      "__EMPTY": "InconsistenWithEndCustomer",
+      "__EMPTY_1": "Identification of end customer is not consistent with associated account number. (formerly CreditorConsistency).",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "CPF/CNPJ do usuário recebedor não é consistente com o titular da conta transacional especificada."
+    },
+    {
+      "Domínios Reason para o Brasil": "BE05",
+      "__EMPTY": "UnrecognisedInitiatingParty",
+      "__EMPTY_1": "Party who initiated the message is not recognised by the end customer",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "CNPJ do iniciador de pagamento não se encontra cadastrado no arranjo Pix."
+    },
+    {
+      "Domínios Reason para o Brasil": "BE17",
+      "__EMPTY": "InvalidCreditorIdentificationCode",
+      "__EMPTY_1": "Creditor or Ultimate Creditor identification code missing or invalid",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "QR Code rejeitado pelo participante do usuário recebedor."
+    },
+    {
+      "Domínios Reason para o Brasil": "CH11",
+      "__EMPTY": "CreditorIdentifierIncorrect",
+      "__EMPTY_1": "Value in Creditor Identifier is incorrect",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "CPF/CNPJ do usuário recebedor incorreto."
+    },
+    {
+      "Domínios Reason para o Brasil": "CH16",
+      "__EMPTY": "ElementContentFormallyIncorrect",
+      "__EMPTY_1": "Content is incorrect",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Preenchimento do conteúdo da mensagem incorreto ou incompatível com as regras de negócio."
+    },
+    {
+      "Domínios Reason para o Brasil": "DS04",
+      "__EMPTY": "OrderRejected",
+      "__EMPTY_1": "The order was rejected by the bank side (for reasons concerning content)",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Ordem rejeitada pelo participante do usuário recebedor."
+    },
+    {
+      "Domínios Reason para o Brasil": "DS0G",
+      "__EMPTY": "NotAllowedPayment",
+      "__EMPTY_1": "Signer is not allowed to sign this operation type.",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Participante que assinou a mensagem não é autorizado a realizar a operação na conta PI debitada. No caso em que o participante que assinou a mensagem não é o titular da conta PI debitada nem é o liquidante no SPI do participante do usuário pagador."
+    },
+    {
+      "Domínios Reason para o Brasil": "DS24",
+      "__EMPTY": "WaitingTimeExpired ",
+      "__EMPTY_1": "Waiting time expired due to incomplete order",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Ordem rejeitada por extrapolação do tempo decorrido entre o envio da pain.013 e o recebimento da pacs.008 correspondente pelo participante do usuário recebedor."
+    },
+    {
+      "Domínios Reason para o Brasil": "DS27",
+      "__EMPTY": "UserNotYetActivated",
+      "__EMPTY_1": "The user is not yet activated ",
+      "__EMPTY_2": "SPI ",
+      "__EMPTY_3": "Participante não se encontra cadastrado ou ainda não iniciou a operação no SPI."
+    },
+    {
+      "Domínios Reason para o Brasil": "DT02",
+      "__EMPTY": "InvalidCreationDate",
+      "__EMPTY_1": "Invalid creation date and time in Group Header (eg, historic date)",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Data e Hora do envio da mensagem inválida"
+    },
+    {
+      "Domínios Reason para o Brasil": "DT05",
+      "__EMPTY": "InvalidCutOffDate",
+      "__EMPTY_1": "Associated message, payment information block or transaction was received after agreed processing cut-off date, i.e., date in the past.",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Transação extrapola o prazo máximo para devolução de pagamento instantâneo regulamentado pelo arranjo Pix."
+    },
+    {
+      "Domínios Reason para o Brasil": "ED05",
+      "__EMPTY": "SettlementFailed",
+      "__EMPTY_1": "Settlement of the transaction has failed",
+      "__EMPTY_2": "SPI / Participante do usuário recebedor",
+      "__EMPTY_3": "Erro no processamento do pagamento instantâneo  (erro genérico)."
+    },
+    {
+      "Domínios Reason para o Brasil": "FF07",
+      "__EMPTY": "InvalidPurpose",
+      "__EMPTY_1": "Purpose is missing or invalid.",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Inconsistência entre a finalidade da transação e o preenchimento do bloco elementos Structured <Strd>."
+    },
+    {
+      "Domínios Reason para o Brasil": "FF08",
+      "__EMPTY": "InvalidEndToEndId",
+      "__EMPTY_1": "End to End Id missing or invalid",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "Identificador da operação mal formatado."
+    },
+    {
+      "Domínios Reason para o Brasil": "MD01",
+      "__EMPTY": "NoMandate",
+      "__EMPTY_1": "No Mandate",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "ISPB do participante facilitador de serviço Pix Saque ou Pix Troco inexistente."
+    },
+    {
+      "Domínios Reason para o Brasil": "RC09",
+      "__EMPTY": "InvalidDebtorClearingSystemMemberIdentifier",
+      "__EMPTY_1": "Debtor ClearingSystemMember identifier is invalid or missing",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "ISPB do participante do usuário pagador inválido ou inexistente."
+    },
+    {
+      "Domínios Reason para o Brasil": "RC10",
+      "__EMPTY": "InvalidCreditorClearingSystemMemberIdentifier",
+      "__EMPTY_1": "Creditor ClearingSystemMember identifier is invalid or missing",
+      "__EMPTY_2": "SPI",
+      "__EMPTY_3": "ISPB do participante do usuário recebedor inválido ou inexistente. "
+    },
+    {
+      "Domínios Reason para o Brasil": "RR04",
+      "__EMPTY": "Regulatory Reason",
+      "__EMPTY_1": "Regulatory Reason",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "Ordem de pagamento em que o usuário pagador é sancionado por resolução do Conselho de Segurança das Nações Unidas (CSNU). Nos casos em que o usuário recebedor for o sancionado, a ordem de pagamento não deve ser rejeitada."
+    },
+    {
+      "Domínios Reason para o Brasil": "SL02",
+      "__EMPTY": "SpecificServiceOfferedByCreditorAgent",
+      "__EMPTY_1": "Due to specific service offered by the Creditor Agent",
+      "__EMPTY_2": "Participante do usuário recebedor",
+      "__EMPTY_3": "A transação original não está relacionada aos serviços de Pix Saque ou Pix Troco."
+    },
+    {
+      "Mensagem ISO 20022": "Observação: Essa lista tende a evoluir a medida que o sistema for sendo desenvolvido."
+    }
+  ]
+}
