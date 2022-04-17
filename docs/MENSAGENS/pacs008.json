@@ -1,0 +1,2203 @@
+{
+  "pacs.008": [
+    {
+      "Nível": 0,
+      " MessageElement/BuildingBlock<XML Tag>": "<FIToFICstmrCdtTrf>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Comentários": "Código da mensagem"
+    },
+    {
+      "Nível": 1,
+      " MessageElement/BuildingBlock<XML Tag>": "GroupHeader <GrpHdr>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Definição": "Common characteristics for all individual transactions included in the message",
+      "Comentários": "Conjunto de elementos do cabeçalho da mensagem"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "MessageIdentification <MsgId>",
+      "Nome no Brasil": "idMensagem",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Definition: Point to point reference, as assigned by the instructing party, and sent to the next party in the chain to unambiguously identify the message.\r\nUsage: The instructing party has to make sure that MessageIdentification is unique per instructed party for a pre-agreed period.",
+      "Comentários": "Identificação única de cada mensagem enviada",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão Mxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas). Considerando que:\r\n•  “M” – fixo (1 caractere); \r\n• xxxxxxxx – ISPB do emissor da mensagem  (8 caracteres numéricos [0-9]);\r\n• kkkkkkkkkkkkkkkkkkkkkkk – 23 caracteres alfanuméricos [a-z|A-Z|0-9];\r\nO participante direto do SPI deve garantir que o <MsgId> gerado por ele seja único, não se repetindo em qualquer outra mensagem enviada ao sistema."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "CreationDateTime <CreDtTm>",
+      "Nome no Brasil": "dataHoraCriacaoParaEmissao",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "DateTime",
+      "Tamanho no Brasil": "YYYY-MM-DD'T'hh:mm:ss.sss'Z'",
+      "Definição": "Date and time at which the message was created.",
+      "Comentários": "Data e hora de criação da mensagem pelo participante durante o processo de emissão ao sistema de liquidação, ou data e hora de criação da mensagem pelo sistema de liquidação durante o processo de emissão ao participante.",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão UTC (YYYY-MM-DD'T'hh:mm:ss.sss'Z')"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "NumberOfTransactions <NbOfTxs>",
+      "Nome no Brasil": "quantidadeTransacoes",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 15 caracteres numéricos",
+      "Definição": "Number of individual transactions contained in the message\r\n",
+      "Comentários": "Quantidade de instruções de pagamento (transações) incluídas na mensagem.",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com o valor maior ou igual a \"1\"  (NbOfTxs >=1). A definição do número máximo de transações por mensagem será definido a posteriori."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "SettlementInformation <SttlmInf>",
+      "Nome no Brasil": "metodoLiquidacao",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Method used to settle the (batch of) payment instructions.\r\n",
+      "Comentários": "Conjunto de Elementos para indicar o Método usado para liquidar as instruções de pagamento. ",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com a opção estabelecida na tabela de domínios."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "SettlementMethod <SttlmMtd>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "PaymentTypeInformation <PmtTpInf>",
+      "Nome no Brasil": "prioridadePagamento",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Indicator of the urgency or order of importance that the instructing party would like the instructed party to apply to the processing of the instruction. ",
+      "Comentários": "Conjunto de Elementos usado para Indicadar liquidação prioritária ou não prioritária. ",
+      "Regra para o Brasil": "Deve ser preenchido com uma das opções estabelecidas na tabela de domínios. \r\n"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "InstructionPriority <InstrPrty>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "ServiceLevel <SvcLvl>",
+      "Nome no Brasil": "tipoPrioridadePagamento",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "6 caracteres alfanuméricos",
+      "Definição": "Agreement under which or rules under which the transaction should be processed.",
+      "Comentários": "Conjunto de elementos usado para especificar o tipo de transação prioritária ou não prioritária.",
+      "Regra para o Brasil": "Campo obrigatório, deve ser preenchido com uma das opções estabelecidas na tabela de domínios.\r\n•\tSe <InstrPrty> for preenchido com o domínio 'HIGH', esse campo deve ser preenchido com o domínio 'PAGPRI';\r\n\r\n•\tSe <InstrPrty> for preenchido com o domínio 'NORM', esse campo deve ser preenchido com o domínio 'PAGFRD', ou o domínio 'PAGAGD'."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Proprietary <Prtry>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Definição": "Specifies a pre-agreed service or level of service between the parties, as a proprietary code."
+    },
+    {
+      "Nível": 1,
+      " MessageElement/BuildingBlock<XML Tag>": "CreditTransferTransactionInformation <CdtTrfTxInf>",
+      " Mult.  ISO": "[1..*]",
+      "Mult. Brasil": "[1..*]",
+      "Type ": "±",
+      "Definição": "Set of elements providing information specific to the individual credit transfer(s).",
+      "Comentários": "Conjunto de elementos que fornecem informações específicas para as transferências individuais de crédito. O modelo de negócios do Brasil possibilitará a inclusão de mais de uma instrução de pagamento (transações) por mensagem.  A definição do número máximo de transações por cada mensagem será definido a posteriori."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "PaymentIdentification <PmtId>",
+      "Nome no Brasil": "idFimAFim",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "32 caracteres alfanuméricos",
+      "Definição": "Set of elements used to reference a payment instruction.TransactionIdentification or UETR must be present. Both may be present",
+      "Comentários": "Conjunto de elementos usados ​​para referenciar uma instrução de pagamento."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "EndToEndIdentification <EndToEndId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Definição": "Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain.",
+      "Comentários": "Identificação única do evento. Esse número é usado em toda a cadeia de mensagens de uma instrução de pagamento.",
+      "Regra para o Brasil": "Deve ser preenchido no formato padrão ExxxxxxxxyyyyMMddHHmmkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas), sendo:\r\n•  “E” – fixo (1 caractere); \r\n• xxxxxxxx – identificação do agente que gerou o <EndToEndId>, podendo ser: o ISPB do participante direto, o ISPB do participante indireto ou os 8 primeiros dígitos do CNPJ do iniciador de pagamento  (8 caracteres numéricos [0-9]);\r\n• yyyyMMddHHmm – data, hora e minuto (12 caracteres), seguindo o horário UTC, da submissão da ordem de pagamento, caso a liquidação seja prioritária, ou prevista para o envio da ordem ao sistema de liquidação, caso seja realizado um agendamento. Para ordens prioritárias e não prioritárias, aceita-se o preenchimento, pelo agente que gerou o <EndToEndId>, com uma tolerância máxima de 12 horas, para o futuro e para o passado, em relação ao horário efetivo de processamento da ordem pelo SPI; \r\n• kkkkkkkkkkk – sequencial criado pelo agente que gerou o <EndToEndId>  (11 caracteres alfanuméricos [a-z|A-Z|0-9]). Deve ser único dentro de cada “yyyyMMddHHmm”.\r\n                               \r\nAdmite-se que o <EndToEndId> seja gerado pelo participante direto, pelo participante indireto ou pelo iniciador de pagamento. Ele deve ser único, não podendo ser repetido em qualquer outra operação enviada ao SPI. "
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "TransactionIdentification <TxId>",
+      "Nome no Brasil": "idConciliacaoRecebedor",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 35 caracteres alfanuméricos",
+      "Definição": "Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain.",
+      "Comentários": "Identificação única da transação. ",
+      "Regra para o Brasil": "Regra de preenchimento:\r\n• Se o campo formaDeIniciacao for igual a QRES, será opcional seu preenchimento com o <TxId> do QR Code estático. Caso seja preenchido, o <TxId> deve conter até 25 caracteres alfanuméricos ([a-z|A-Z|0-9]).\r\n• Se o campo formaDeIniciacao for igual a QRDN, será obrigatório seu preenchimento com o <TxId> do payload JSON do QR Code dinâmico.O <TxId> deve conter entre 26 e 35 caracteres alfanuméricos ([a-z|A-Z|0-9]).\r\n• Se o campo formaDeIniciacao for igual a INIC, será obrigatório seu preenchimento com o <TxId> recebido por meio do serviço de iniciação de transação de pagamento, que deve conter até 25 caracteres alfanuméricos ([a-z|A-Z|0-9]).\r\n• Se o campo formaDeIniciacao for igual a QRPG, será obrigatório seu preenchimento com o <PmtInfId> recebido por meio da pain.013 que gerou a instrução de pagamento, que deve conter entre 26 e 35 caracteres alfanuméricos ([a-z|A-Z|0-9]).\r\n• Se o campo formaDeIniciacao for igual a MANU ou DICT, este campo não deverá ser preenchido."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "InterbankSettlementAmount <IntrBkSttlmAmt>",
+      "Nome no Brasil": "valor",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "ActiveCurrencyAndAmount",
+      "Tamanho no Brasil": "· Moeda: 3 caracteres  alfanuméricos e;        · Valor:  Máximo 18 caracteres numéricos (2 casas decimais separados por ponto)",
+      "Definição": "Amount of money moved between the instructing agent and the instructed agent\r\nNote: The decimal separator is a dot.",
+      "Comentários": "Valor",
+      "Regra para o Brasil": "O atributo Ccy é obrigatório e preenchido com \"BRL\". Regra de preenchimento:\r\n• Se <Purp> for igual a IPAY, deve ser o único campo de valor preenchido.\r\n• Se <Purp> for igual a GSCB, deve ser preenchido com a somatória do valor da compra e do valor do recurso em espécie disponibilizado.\r\n• Se <Purp> for igual a OTHR, deve ser preenchido com o valor do recurso em espécie disponibilizado."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "AcceptanceDateTime <AccptncDtTm>",
+      "Nome no Brasil": "dataHoraRecebimentoPeloParticipanteDoUsuarioPagador",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "DateTime",
+      "Tamanho no Brasil": "YYYY-MM-DD'T'hh:mm:ss.sss'Z'",
+      "Definição": "Point in time when the payment order from the initiating party meets the processing conditions of the account servicing agent. This means that the account servicing agent has received the payment order and has applied checks such as authorisation, availability of funds.",
+      "Comentários": "•\tData e o horário de recebimento pelo participante do usuário pagador, da solicitação de ordem de pagamento instantâneo do usuário pagador; ou\r\n•\tData e horário de recebimento pelo participante do usuário pagador da pain.013 contendo a solicitação de pagamento.\r\n\r\nCaso o pagamento seja prioritário, esta informação será usada para controle de limite de tempo (timeout) do emissor da ordem de pagamento instantâneo.",
+      "Regra para o Brasil": "Campo obrigatório. Deve ser preenchido com:\r\n•\tA data e o horário da solicitação da ordem de pagamento instantâneo pelo usuário pagador ao participante do usuário pagador, no formato padrão UTC (YYYY-MM-DD'T'hh:mm:ss.sss'Z'); ou\r\n•\tA data e o horário de recebimento pelo participante do usuário pagador da pain.013 contendo a solicitação de pagamento, no formato padrão UTC (YYYY-MM-DD'T'hh:mm:ss.sss'Z')."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "ChargeBearer <ChrgBr>",
+      "Nome no Brasil": "participanteTarifado",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Specifies which party/parties will bear the charges associated with the processing of the payment transaction. ",
+      "Comentários": "Especifica qual parte / partes arcará com as cobranças associadas ao processamento da instrução de pagamento. ",
+      "Regra para o Brasil": "Campo obrigatório deve ser preenchido com a opção estabelecida na tabela de domínios."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "MandateRelatedInformation <MndtRltdInf>",
+      "Nome no Brasil": "formaDeIniciacao",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Provides further details of the mandate signed between the creditor and the debtor.",
+      "Comentários": "Especifica a forma de iniciação do pagamento.",
+      "Regra para o Brasil": "Deve ser preenchido com uma das opções da tabela de domínios proprietários. "
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Type <Tp>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Specifies the type of mandate, such as paper, electronic or scheme."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "LocalInstrument <LclInstrm>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "User community specific instrument."
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Proprietary <Prtry>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Definição": "Specifies the local instrument, as a proprietary code."
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "InitiatingParty <InitgPty>",
+      "Nome no Brasil": "cnpjIniciadorPagamento",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "14 caracteres numéricos ",
+      "Definição": "Party that initiates the payment.\r\nUnique and unambiguous identification of a party.\r\nIdentification assigned by an institution.",
+      "Comentários": "Conjunto de elementos usado para informar quem foi o iniciador de pagamento, não necessariamente  IF ou IP. ",
+      "Regra para o Brasil": "Campo opcional. Deve ser preenchido com o CNPJ da instituição que presta serviço de iniciação de transação de pagamento. CNPJ com 14 dígitos (sem pontos ou traços). Caso o pagamento tenha sido iniciado por Serviço de Iniciação no Pix, o seu preenchimento é obrigatório; caso contrário, não deve ser preenchido."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "OrganisationIdentification <OrgId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Other <Othr>",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "Debtor <Dbtr>",
+      "Nome no Brasil": "nomeUsuarioPagador",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "Máximo 140 caracteres alfanuméricos",
+      "Definição": "Party that owes an amount of money to the (ultimate) creditor.\r\nUnique and unambiguous identification of a party.",
+      "Comentários": "Nome/razão social ou nome fantasia do usuário pagador, registrados na forma da legislação em vigor - pessoa física ou jurídica que está enviando os recursos por meio da instrução de pagamento.",
+      "Regra para o Brasil": "Campo Obrigatório."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Name <Nm>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      "Nome no Brasil": "cpfCnpjUsuarioPagador",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "11 caracteres numéricos para CPF ou 14 caracteres numéricos para CNPJ ",
+      "Comentários": "Identificação única do usuário pagador ",
+      "Regra para o Brasil": "Deve ser preenchido com CPF ou CNPJ do usuário pagador.O CPF será utilizado com 11 dígitos e o CNPJ com 14 dígitos (ambos com dígitos verificadores). Deve ser informado sem pontos ou traços.\r\n\r\nNo caso de pagamento de obrigações e direitos de instituição participante do SPI deve ser preenchido com o CNPJ da instituição pagadora."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "PrivateIdentification <PrvtId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Other <Othr>",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[1..1]"
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "DebtorAccount <DbtrAcct>",
+      "Nome no Brasil": "contaUsuarioPagador",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "Máximo 20 caracteres numéricos",
+      "Definição": "Unambiguous identification of the account of the debtor to which a debit entry will be made\r\nas a result of the transaction.",
+      "Comentários": "Número da conta transacional do usuário pagador.",
+      "Regra para o Brasil": "Campo obrigatório. Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir), se houver valor alfanumérico, este deve ser convertido para 0."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Other <Othr>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Issuer <Issr>",
+      "Nome no Brasil": "agenciaUsuarioPagador",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 4 caracteres numéricos",
+      "Definição": "Entity that assigns the identification.",
+      "Comentários": "Agência do usuário pagador. ",
+      "Regra para o Brasil": "Campo opcional. Preenchido, caso a conta transacional esteja associda a uma agência. Número da agência deve ser informado sem dígito verificador."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Type <Tp>",
+      "Nome no Brasil": "tipoContaUsuarioPagador",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Nature or use of the account in a proprietary form.",
+      "Comentários": "Conjunto de elementos que especifica o tipo de conta transacional do usuário pagador.  ",
+      "Regra para o Brasil": "Deve ser preenchido com uma das opções estabelecidas na tabela de domínios para o tipo de conta transacional. \r\n"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Code <Cd>",
+      " Mult.  ISO": "[1..1] ",
+      "Mult. Brasil": "[1..1] ",
+      "Type ": "CodeSet"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "DebtorAgent <DbtrAgt>",
+      "Nome no Brasil": "participanteDoUsuarioPagador",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "8 caracteres numéricos",
+      "Definição": "Financial institution servicing an account for the debtor.\r\nSpecifies the details to identify a financial institution",
+      "Comentários": "Conjunto de elementos usado para identificar o participante do usuário pagador - participante no qual o usuário pagador detém a conta transacional. Caso o participante do usuário pagador seja participante indireto do SPI, a busca da identificação do seu liquidante no SPI será realizada por procedimento interno do SPI.\r\n",
+      "Regra para o Brasil": "Deve ser preenchido com o ISPB do participante direto ou indireto do SPI, conforme o caso, no qual o usuário pagador detém a conta transacional."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "FinancialInstitutionIdentification <FinInstnId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "ClearingSystemMemberIdentification <ClrSysMmbId>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "MemberIdentification <MmbId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "CreditorAgent <CdtrAgt>",
+      "Nome no Brasil": "participanteDoUsuarioRecebedor",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "8 caracteres numéricos",
+      "Definição": "Financial institution servicing an account for the creditor.\r\nSpecifies the details to identify a financial institution",
+      "Comentários": "Conjunto de elementos usado para identificar o participante do usuário recebedor - participante no qual o usuário recebedor detém a conta transacional . Caso o participante do usuário recebedor seja participante indireto do SPI, a busca da identificação do seu liquidante no SPI será realizada por procedimento interno do SPI.",
+      "Regra para o Brasil": "Deve ser preenchido com o ISPB do participante direto ou indireto do SPI, conforme o caso, no qual o usuário recebedor detém a conta transacional."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "FinancialInstitutionIdentification <FinInstnId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "ClearingSystemMemberIdentification <ClrSysMmbId>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "MemberIdentification <MmbId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "Creditor <Cdtr>",
+      "Nome no Brasil": "cpfCnpjUsuarioRecebedor",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "11 caracteres numéricos para CPF ou 14 caracteres numéricos para CNPJ",
+      "Definição": "Party to which an amount of money is due.\r\nUnique and unambiguous identification of a person.",
+      "Comentários": "Identificação única do usuário recebedor - pessoa que está recebendo os recursos por meio da instrução de pagamento. ",
+      "Regra para o Brasil": "Deve ser preenchido com CPF ou CNPJ do usuário recebedor. O CPF será utilizado com 11 dígitos e o CNPJ com 14 dígitos (ambos com dígitos verificadores). Deve ser informado sem pontos ou traços.\r\n\r\nNo caso de recebimento de obrigações e direitos por instituição participante do SPI deve ser preenchido com o CNPJ da instituição recebedora."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "PrivateIdentification <PrvtId>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Other <Othr>",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[1..1]"
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "CreditorAccount <CdtrAcct>",
+      "Nome no Brasil": "contaUsuarioRecebedor",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "Máximo 20 caracteres numéricos",
+      "Definição": "Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.",
+      "Comentários": "Número da conta transacional do usuário recebedor",
+      "Regra para o Brasil": "Campo obrigatório. Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir), se houver valor alfanumérico, este deve ser convertido para 0."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Other <Othr>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Issuer <Issr>",
+      "Nome no Brasil": "agenciaUsuarioRecebedor",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "Máximo 4 caracteres numéricos",
+      "Definição": "Entity that assigns the identification",
+      "Comentários": "Agência do usuário recebedor. ",
+      "Regra para o Brasil": "Campo opcional. Preenchido, caso a conta transacional esteja associda a uma agência. Número da agência deve ser informado sem dígito verificador."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Type <Tp> ",
+      "Nome no Brasil": "tipoContaUsuarioRecebedor",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Nature or use of the account in a proprietary form.",
+      "Comentários": "Conjunto de elementos que especifica o tipo de conta transacional do usuário recebedor.  ",
+      "Regra para o Brasil": "Deve ser preenchido com uma das opções estabelecidas na tabela de domínios para o tipo de conta transacional.\r\nO domínio SLRY, para Conta-Salário, não deve ser selecionado nesse campo, pois esse tipo de conta não recebe pagamentos."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Code <Cd>",
+      " Mult.  ISO": "[1..1] ",
+      "Mult. Brasil": "[1..1] ",
+      "Type ": "CodeSet"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Proxy <Prxy> ",
+      "Nome no Brasil": "idContaTransacional",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "Máximo 77 caracteres alfanuméricos com caracteres especiais ",
+      "Definição": "Identification used to indicate the account identification under another specified name.",
+      "Comentários": "Conjunto de elementos usado para identificar a conta transacional por meio de chave de endereçamento do usuário recebedor",
+      "Regra para o Brasil": "Regra de preenchimento:\r\n\r\n• Se a forma de iniciação do pagamento for igual a MANU, o bloco de elemento <Prxy> não deve ser preenchido;\r\n• Se a forma de iniciação do pagamento for igual DICT, QRDN, QRES, INIC ou QRPG o bloco de elemento <Prxy> deve ser sempre preenchido com a chave Pix;\r\n\r\nO formato da chave Pix indica o seu tipo e deve ser preenchido de acordo com as especificações contidas na seção 1 do Manual Operacional do DICT."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "Identification <Id>",
+      " Mult.  ISO": "[1..1] ",
+      "Mult. Brasil": "[1..1] ",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "Purpose <Purp>",
+      "Nome no Brasil": "finalidadeDaTransacao",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Underlying reason for the payment transaction.\r\nUsage: Purpose is used by the end-customers, that is initiating party, (ultimate) debtor, (ultimate) creditor to provide information concerning the nature of the payment. Purpose is a content element, which is not used for processing by any of the agents involved in the payment chain.",
+      "Comentários": "Finalidade da transação de forma codificada.",
+      "Regra para o Brasil": "Campo obrigatório. Deve ser preenchido com umas das opções da Tabela de Domínios. No caso de formaDeIniciacao igual a 'QRPG', preencher com 'IPAY'.\r\n"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Code <Cd>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "CodeSet",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos"
+    },
+    {
+      "Nível": 2,
+      " MessageElement/BuildingBlock<XML Tag>": "RemittanceInformation <RmtInf>",
+      "Nome no Brasil": "informacoesEntreUsuarios",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Tamanho no Brasil": "Máximo 140 caracteres alfanuméricos",
+      "Definição": "Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivable system, in na unstructured form.",
+      "Comentários": "Conjunto de elementos usado para envio de informações do usuário pagador para o usuário recebedor, ou do usuário recebedor para o usuário pagador, no caso de transações do tipo QRPG.",
+      "Regra para o Brasil": "Deve ser preenchido sempre que o usuário pagador ou o usuário recebedor inserir alguma informação adicional em um pagamento."
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Unstructured <Ustrd>",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "Text"
+    },
+    {
+      "Nível": 3,
+      " MessageElement/BuildingBlock<XML Tag>": "Structured <Strd>",
+      "Nome no Brasil": "modalidadeAgente",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[0..1]",
+      "Type ": "±",
+      "Definição": "Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivable system, in a structured form. ",
+      "Comentários": "Conjunto de elementos estruturados usado para para envio de informações do pagador para o recebedor. ",
+      "Regra para o Brasil": "Campo opcional. Regra geral:\r\n• Se <Purp> for igual a IPAY,  o bloco de elementos Structured <Strd>  não deverá ser preenchido; \r\n• Se <Purp> for igual a GSCB ou OTHR, o bloco de elementos Structured <Strd> deverá ser preenchido.   "
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "ReferredDocumentInformation <RfrdDocInf>",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Provides the identification and the content of the referred document.",
+      "Comentários": "Conjunto de elementos usado para discriminar a modalidade do agente de saque e identificar o facilitador de serviço de saque.",
+      "Regra para o Brasil": "Deve ser preenchido com umas das opções da tabela de domínios proprietários."
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "Type <Tp>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Specifies the type of referred document."
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "CodeOrProprietary <CdOrPrtry>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Provides the type details of the referred document."
+    },
+    {
+      "Nível": 7,
+      " MessageElement/BuildingBlock<XML Tag>": "Proprietary <Prtry>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "5 caracteres alfanuméricos",
+      "Definição": "Proprietary identification of the type of the remittance document.",
+      "Comentários": "Modalidades do agente de forma codificada."
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "Issuer <Issr>",
+      "Nome no Brasil": "prestadorDoServicoDeSaque",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "8 caracteres numéricos",
+      "Definição": "Identification of the issuer of the reference document type.",
+      "Comentários": "Identificação do facilitador de serviço de saque (FSS).",
+      "Regra para o Brasil": "Deve ser preenchido com o ISPB do participante do SPI facilitador de serviço de Pix Saque ou Pix Troco."
+    },
+    {
+      "Nível": 4,
+      " MessageElement/BuildingBlock<XML Tag>": "ReferredDocumentAmount <RfrdDocAmt>",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "±",
+      "Definição": "Provides details on the amounts of the referred document. ",
+      "Regra para o Brasil": "                                                                                                          "
+    },
+    {
+      "Nível": 5,
+      " MessageElement/BuildingBlock<XML Tag>": "AdjustmentAmountAndReason <AdjstmntAmtAndRsn>",
+      "Nome no Brasil": "valorDoDinheiroOuCompra",
+      " Mult.  ISO": "[0..*]",
+      "Mult. Brasil": "[1..2]",
+      "Type ": "±",
+      "Definição": "Specifies detailed information on the amount and reason of the document adjustment. ",
+      "Comentários": "Conjunto de elementos usado para discriminar os valores do pagamento.",
+      "Regra para o Brasil": "Regra de preenchimento:                                                                                                                                                  \r\n• Se <Purp> for igual a GSCB, será obrigatório o preenchimento de dois blocos <AdjstmntAmtAndRsn> distintos, um com o valor da compra e o código VLCP e outro com o valor do recurso em espécie disponibilizado e o código VLDN; e\r\n• Se <Purp> for igual a OTHR, será obrigatório o preenchimento de um bloco <AdjstmntAmtAndRsn>, com o valor do recurso em espécie disponibilizado e o código VLDN.                                            "
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "Amount <Amt>",
+      " Mult.  ISO": "[1..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Amount",
+      "Tamanho no Brasil": "· Moeda: 3 caracteres  alfanuméricos e;\r\n· Valor:  Máximo 18 caracteres numéricos (2 casas decimais separados por ponto)",
+      "Definição": "Amount of money of the document adjustment.",
+      "Comentários": "Valor da compra / Valor do recurso em espécie disponibilizado.",
+      "Regra para o Brasil": "O atributo Ccy é obrigatório e preenchido com \"BRL\"."
+    },
+    {
+      "Nível": 6,
+      " MessageElement/BuildingBlock<XML Tag>": "Reason <Rsn>",
+      "Nome no Brasil": "tipoDinheiroOuCompra",
+      " Mult.  ISO": "[0..1]",
+      "Mult. Brasil": "[1..1]",
+      "Type ": "Text",
+      "Tamanho no Brasil": "4 caracteres alfanuméricos",
+      "Definição": "Specifies the reason for the adjustment. ",
+      "Comentários": "Tipos de valores discriminados de forma codificada",
+      "Regra para o Brasil": "Deve ser preenchido com as opções estabelecidas na tabela de domínios - Prop. "
+    }
+  ],
+  "Exemplo 1 uso de nº conta": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFICstmrCdtTrf>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00038166dfg4frgh342434234324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:00.510Z</CreDtTm>"
+    },
+    {
+      "__EMPTY_1": "<NbOfTxs>1</NbOfTxs>"
+    },
+    {
+      "__EMPTY_1": "<SttlmInf>"
+    },
+    {
+      "__EMPTY_2": "<SttlmMtd>CLRG</SttlmMtd>"
+    },
+    {
+      "__EMPTY_1": "</SttlmInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtTpInf>"
+    },
+    {
+      "__EMPTY_2": "<InstrPrty>HIGH</InstrPrty>"
+    },
+    {
+      "__EMPTY_2": "<SvcLvl>"
+    },
+    {
+      "__EMPTY_3": "<Prtry>PAGPRI</Prtry>"
+    },
+    {
+      "__EMPTY_2": "</SvcLvl>"
+    },
+    {
+      "__EMPTY_1": "</PmtTpInf>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": "<CdtTrfTxInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtId>"
+    },
+    {
+      "__EMPTY_2": "<EndToEndId>E00038166201907261559y6j6mt9l0pi</EndToEndId>"
+    },
+    {
+      "__EMPTY_1": "</PmtId>"
+    },
+    {
+      "__EMPTY_1": "<IntrBkSttlmAmt Ccy=\"BRL\">58770.23</IntrBkSttlmAmt>"
+    },
+    {
+      "__EMPTY_1": "<AccptncDtTm>2019-07-26T15:59:57.800Z</AccptncDtTm>"
+    },
+    {
+      "__EMPTY_1": "<ChrgBr>SLEV</ChrgBr>"
+    },
+    {
+      "__EMPTY_1": "<MndtRltdInf>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<LclInstrm>"
+    },
+    {
+      "__EMPTY_4": "<Prtry>MANU</Prtry>"
+    },
+    {
+      "__EMPTY_3": "</LclInstrm>"
+    },
+    {
+      "__EMPTY_2": "</Tp>"
+    },
+    {
+      "__EMPTY_1": "</MndtRltdInf>"
+    },
+    {
+      "__EMPTY_1": "<Dbtr>"
+    },
+    {
+      "__EMPTY_2": "<Nm>Fulano da Silva</Nm>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>12822222215</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Dbtr>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>1111108</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>0001</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_1": "</DbtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>11111111</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</DbtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>22222222</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</CdtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<Cdtr>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>45454545455</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Cdtr>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>23683707994215</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>5770</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_1": "</CdtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<Purp>"
+    },
+    {
+      "__EMPTY_2": "<Cd>IPAY</Cd>"
+    },
+    {
+      "__EMPTY_1": "</Purp>"
+    },
+    {
+      "__EMPTY_1": "<RmtInf>"
+    },
+    {
+      "__EMPTY_2": "<Ustrd> campo livre</Ustrd>"
+    },
+    {
+      "__EMPTY_1": "</RmtInf>"
+    },
+    {
+      "__EMPTY": "</CdtTrfTxInf>"
+    },
+    {
+      "Legenda:": "</FIToFICstmrCdtTrf>"
+    }
+  ],
+  "Exemplo 2 uso de endereçamento": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFICstmrCdtTrf>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00038166dfg4frgh342434234324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:00.510Z</CreDtTm>"
+    },
+    {
+      "__EMPTY_1": "<NbOfTxs>1</NbOfTxs>"
+    },
+    {
+      "__EMPTY_1": "<SttlmInf>"
+    },
+    {
+      "__EMPTY_2": "<SttlmMtd>CLRG</SttlmMtd>"
+    },
+    {
+      "__EMPTY_1": "</SttlmInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtTpInf>"
+    },
+    {
+      "__EMPTY_2": "<InstrPrty>HIGH</InstrPrty>"
+    },
+    {
+      "__EMPTY_2": "<SvcLvl>"
+    },
+    {
+      "__EMPTY_3": "<Prtry>PAGPRI</Prtry>"
+    },
+    {
+      "__EMPTY_2": "</SvcLvl>"
+    },
+    {
+      "__EMPTY_1": "</PmtTpInf>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": "<CdtTrfTxInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtId>"
+    },
+    {
+      "__EMPTY_2": "<EndToEndId>E00038166201907261559y6j6mt9l0pi</EndToEndId>"
+    },
+    {
+      "__EMPTY_1": "</PmtId>"
+    },
+    {
+      "__EMPTY_1": "<IntrBkSttlmAmt Ccy=\"BRL\">770.23</IntrBkSttlmAmt>"
+    },
+    {
+      "__EMPTY_1": "<AccptncDtTm>2019-07-26T15:59:59.800Z</AccptncDtTm>"
+    },
+    {
+      "__EMPTY_1": "<ChrgBr>SLEV</ChrgBr>"
+    },
+    {
+      "__EMPTY_1": "<MndtRltdInf>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<LclInstrm>"
+    },
+    {
+      "__EMPTY_4": "<Prtry>DICT</Prtry>"
+    },
+    {
+      "__EMPTY_3": "</LclInstrm>"
+    },
+    {
+      "__EMPTY_2": "</Tp>"
+    },
+    {
+      "__EMPTY_1": "</MndtRltdInf>"
+    },
+    {
+      "__EMPTY_1": "<Dbtr>"
+    },
+    {
+      "__EMPTY_2": "<Nm>Fulano da Silva</Nm>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>12822222215</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Dbtr>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>888888833</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr> 4542</Issr> "
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>SVGS</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_1": "</DbtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>11111111</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</DbtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>22222222</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</CdtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<Cdtr>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>45454545455</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Cdtr>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>23683707994215</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>5770</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_2": "<Prxy> "
+    },
+    {
+      "__EMPTY_3": "<Id>bc@bc.com.br</Id>"
+    },
+    {
+      "__EMPTY_2": "</Prxy> "
+    },
+    {
+      "__EMPTY_1": "</CdtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<Purp>"
+    },
+    {
+      "__EMPTY_2": "<Cd>IPAY</Cd>"
+    },
+    {
+      "__EMPTY_1": "</Purp>"
+    },
+    {
+      "__EMPTY_1": "<RmtInf>"
+    },
+    {
+      "__EMPTY_2": "<Ustrd> campo livre</Ustrd>"
+    },
+    {
+      "__EMPTY_1": "</RmtInf>"
+    },
+    {
+      "__EMPTY": "</CdtTrfTxInf>"
+    },
+    {
+      "Legenda:": "</FIToFICstmrCdtTrf>"
+    }
+  ],
+  "Exemplo Pix Saque": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFICstmrCdtTrf>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00038166dfg4frgh342434234324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:00.510Z</CreDtTm>"
+    },
+    {
+      "__EMPTY_1": "<NbOfTxs>1</NbOfTxs>"
+    },
+    {
+      "__EMPTY_1": "<SttlmInf>"
+    },
+    {
+      "__EMPTY_2": "<SttlmMtd>CLRG</SttlmMtd>"
+    },
+    {
+      "__EMPTY_1": "</SttlmInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtTpInf>"
+    },
+    {
+      "__EMPTY_2": "<InstrPrty>HIGH</InstrPrty>"
+    },
+    {
+      "__EMPTY_2": "<SvcLvl>"
+    },
+    {
+      "__EMPTY_3": "<Prtry>PAGPRI</Prtry>"
+    },
+    {
+      "__EMPTY_2": "</SvcLvl>"
+    },
+    {
+      "__EMPTY_1": "</PmtTpInf>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": "<CdtTrfTxInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtId>"
+    },
+    {
+      "__EMPTY_2": "<EndToEndId>E00038166201907261559y6j6mt9l0pi</EndToEndId>"
+    },
+    {
+      "__EMPTY_2": "<TxId>Ktufgh125554870009854823695000</TxId>"
+    },
+    {
+      "__EMPTY_1": "</PmtId>"
+    },
+    {
+      "__EMPTY_1": "<IntrBkSttlmAmt Ccy=\"BRL\">500</IntrBkSttlmAmt>"
+    },
+    {
+      "__EMPTY_1": "<AccptncDtTm>2019-07-26T15:59:57.800Z</AccptncDtTm>"
+    },
+    {
+      "__EMPTY_1": "<ChrgBr>SLEV</ChrgBr>"
+    },
+    {
+      "__EMPTY_1": "<MndtRltdInf>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<LclInstrm>"
+    },
+    {
+      "__EMPTY_4": "<Prtry>QRDN</Prtry>"
+    },
+    {
+      "__EMPTY_3": "</LclInstrm>"
+    },
+    {
+      "__EMPTY_2": "</Tp>"
+    },
+    {
+      "__EMPTY_1": "</MndtRltdInf>"
+    },
+    {
+      "__EMPTY_1": "<Dbtr>"
+    },
+    {
+      "__EMPTY_2": "<Nm>Fulano da Silva</Nm>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>12822222215</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Dbtr>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>1111108</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>0001</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_1": "</DbtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>11111111</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</DbtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>22222222</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</CdtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<Cdtr>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>45454545455</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Cdtr>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>23683707994215</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>5770</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_2": "<Prxy> "
+    },
+    {
+      "__EMPTY_3": "<Id>b6cdf262-4c58-4698-9517-f694e81893d4</Id>"
+    },
+    {
+      "__EMPTY_2": "</Prxy> "
+    },
+    {
+      "__EMPTY_1": "</CdtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<Purp>"
+    },
+    {
+      "__EMPTY_2": "<Cd>OTHR</Cd>"
+    },
+    {
+      "__EMPTY_1": "</Purp>"
+    },
+    {
+      "__EMPTY_1": "<RmtInf>"
+    },
+    {
+      "__EMPTY_2": "<Ustrd> campo livre</Ustrd>"
+    },
+    {
+      "__EMPTY_2": "<Strd>"
+    },
+    {
+      "__EMPTY_3": "<RfrdDocInf>"
+    },
+    {
+      "__EMPTY_4": "<Tp>"
+    },
+    {
+      "__EMPTY_5": "<CdOrPrtry>"
+    },
+    {
+      "__EMPTY_6": "<Prtry>AGTEC</Prtry>"
+    },
+    {
+      "__EMPTY_5": "</CdOrPrtry>"
+    },
+    {
+      "__EMPTY_5": "<Issr>55555555</Issr>"
+    },
+    {
+      "__EMPTY_4": "</Tp>"
+    },
+    {
+      "__EMPTY_3": "</RfrdDocInf>"
+    },
+    {
+      "__EMPTY_3": "<RfrdDocAmt>"
+    },
+    {
+      "__EMPTY_4": "<AdjstmntAmtAndRsn>"
+    },
+    {
+      "__EMPTY_5": "<Amt Ccy=\"BRL\">500</Amt>"
+    },
+    {
+      "__EMPTY_5": "<Rsn>VLDN</Rsn>"
+    },
+    {
+      "__EMPTY_4": "</AdjstmntAmtAndRsn>"
+    },
+    {
+      "__EMPTY_3": "</RfrdDocAmt>"
+    },
+    {
+      "__EMPTY_2": "</Strd>"
+    },
+    {
+      "__EMPTY_1": "</RmtInf>"
+    },
+    {
+      "__EMPTY": "</CdtTrfTxInf>"
+    },
+    {
+      "Legenda:": "</FIToFICstmrCdtTrf>"
+    }
+  ],
+  "Exemplo Pix Troco": [
+    {
+      "__EMPTY": "preenchimento"
+    },
+    {
+      "__EMPTY": "campos obrigatórios na ISO 20022"
+    },
+    {
+      "__EMPTY": "campos usados no Brasil, mesmo não sendo obrigatórios na ISO 20022"
+    },
+    {
+      "Legenda:": "<FIToFICstmrCdtTrf>"
+    },
+    {
+      "__EMPTY": "<GrpHdr>"
+    },
+    {
+      "__EMPTY_1": " <MsgId>M00038166dfg4frgh342434234324yyh</MsgId>"
+    },
+    {
+      "__EMPTY_1": "<CreDtTm>2019-07-26T16:00:00.510Z</CreDtTm>"
+    },
+    {
+      "__EMPTY_1": "<NbOfTxs>1</NbOfTxs>"
+    },
+    {
+      "__EMPTY_1": "<SttlmInf>"
+    },
+    {
+      "__EMPTY_2": "<SttlmMtd>CLRG</SttlmMtd>"
+    },
+    {
+      "__EMPTY_1": "</SttlmInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtTpInf>"
+    },
+    {
+      "__EMPTY_2": "<InstrPrty>HIGH</InstrPrty>"
+    },
+    {
+      "__EMPTY_2": "<SvcLvl>"
+    },
+    {
+      "__EMPTY_3": "<Prtry>PAGPRI</Prtry>"
+    },
+    {
+      "__EMPTY_2": "</SvcLvl>"
+    },
+    {
+      "__EMPTY_1": "</PmtTpInf>"
+    },
+    {
+      "__EMPTY": "</GrpHdr>"
+    },
+    {
+      "__EMPTY": "<CdtTrfTxInf>"
+    },
+    {
+      "__EMPTY_1": "<PmtId>"
+    },
+    {
+      "__EMPTY_2": "<EndToEndId>E00038166201907261559y6j6mt9l0pi</EndToEndId>"
+    },
+    {
+      "__EMPTY_2": "<TxId>Ktufgh125554870009854823695000</TxId>"
+    },
+    {
+      "__EMPTY_1": "</PmtId>"
+    },
+    {
+      "__EMPTY_1": "<IntrBkSttlmAmt Ccy=\"BRL\">500</IntrBkSttlmAmt>"
+    },
+    {
+      "__EMPTY_1": "<AccptncDtTm>2019-07-26T15:59:57.800Z</AccptncDtTm>"
+    },
+    {
+      "__EMPTY_1": "<ChrgBr>SLEV</ChrgBr>"
+    },
+    {
+      "__EMPTY_1": "<MndtRltdInf>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<LclInstrm>"
+    },
+    {
+      "__EMPTY_4": "<Prtry>QRDN</Prtry>"
+    },
+    {
+      "__EMPTY_3": "</LclInstrm>"
+    },
+    {
+      "__EMPTY_2": "</Tp>"
+    },
+    {
+      "__EMPTY_1": "</MndtRltdInf>"
+    },
+    {
+      "__EMPTY_1": "<Dbtr>"
+    },
+    {
+      "__EMPTY_2": "<Nm>Fulano da Silva</Nm>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>12822222215</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Dbtr>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>1111108</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>0001</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_1": "</DbtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<DbtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>11111111</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</DbtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAgt>"
+    },
+    {
+      "__EMPTY_2": "<FinInstnId>"
+    },
+    {
+      "__EMPTY_3": "<ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_4": "<MmbId>22222222</MmbId>"
+    },
+    {
+      "__EMPTY_3": "</ClrSysMmbId>"
+    },
+    {
+      "__EMPTY_2": "</FinInstnId>"
+    },
+    {
+      "__EMPTY_1": "</CdtrAgt>"
+    },
+    {
+      "__EMPTY_1": "<Cdtr>"
+    },
+    {
+      "__EMPTY_2": " <Id>"
+    },
+    {
+      "__EMPTY_3": " <PrvtId>"
+    },
+    {
+      "__EMPTY_4": "<Othr>"
+    },
+    {
+      "__EMPTY_5": "<Id>45454545455</Id>"
+    },
+    {
+      "__EMPTY_4": "</Othr>"
+    },
+    {
+      "__EMPTY_3": " </PrvtId>"
+    },
+    {
+      "__EMPTY_2": " </Id>"
+    },
+    {
+      "__EMPTY_1": "</Cdtr>"
+    },
+    {
+      "__EMPTY_1": "<CdtrAcct>"
+    },
+    {
+      "__EMPTY_2": "<Id>"
+    },
+    {
+      "__EMPTY_3": "<Othr>"
+    },
+    {
+      "__EMPTY_4": "<Id>23683707994215</Id>"
+    },
+    {
+      "__EMPTY_4": "<Issr>5770</Issr>"
+    },
+    {
+      "__EMPTY_3": "</Othr>"
+    },
+    {
+      "__EMPTY_2": "</Id>"
+    },
+    {
+      "__EMPTY_2": "<Tp>"
+    },
+    {
+      "__EMPTY_3": "<Cd>CACC</Cd>"
+    },
+    {
+      "__EMPTY_2": "</Tp> "
+    },
+    {
+      "__EMPTY_2": "<Prxy> "
+    },
+    {
+      "__EMPTY_3": "<Id>b6cdf262-4c58-4698-9517-f694e81893d4</Id>"
+    },
+    {
+      "__EMPTY_2": "</Prxy> "
+    },
+    {
+      "__EMPTY_1": "</CdtrAcct>"
+    },
+    {
+      "__EMPTY_1": "<Purp>"
+    },
+    {
+      "__EMPTY_2": "<Cd>GSCB</Cd>"
+    },
+    {
+      "__EMPTY_1": "</Purp>"
+    },
+    {
+      "__EMPTY_1": "<RmtInf>"
+    },
+    {
+      "__EMPTY_2": "<Ustrd> campo livre</Ustrd>"
+    },
+    {
+      "__EMPTY_2": "<Strd>"
+    },
+    {
+      "__EMPTY_3": "<RfrdDocInf>"
+    },
+    {
+      "__EMPTY_4": "<Tp>"
+    },
+    {
+      "__EMPTY_5": "<CdOrPrtry>"
+    },
+    {
+      "__EMPTY_6": "<Prtry>AGTEC</Prtry>"
+    },
+    {
+      "__EMPTY_5": "</CdOrPrtry>"
+    },
+    {
+      "__EMPTY_5": "<Issr>55555555</Issr>"
+    },
+    {
+      "__EMPTY_4": "</Tp>"
+    },
+    {
+      "__EMPTY_3": "</RfrdDocInf>"
+    },
+    {
+      "__EMPTY_3": "<RfrdDocAmt>"
+    },
+    {
+      "__EMPTY_4": "<AdjstmntAmtAndRsn>"
+    },
+    {
+      "__EMPTY_5": "<Amt Ccy=\"BRL\">400</Amt>"
+    },
+    {
+      "__EMPTY_5": "<Rsn>VLCP</Rsn>"
+    },
+    {
+      "__EMPTY_4": "</AdjstmntAmtAndRsn>"
+    },
+    {
+      "__EMPTY_4": "<AdjstmntAmtAndRsn>"
+    },
+    {
+      "__EMPTY_5": "<Amt Ccy=\"BRL\">100</Amt>"
+    },
+    {
+      "__EMPTY_5": "<Rsn>VLDN</Rsn>"
+    },
+    {
+      "__EMPTY_4": "</AdjstmntAmtAndRsn>"
+    },
+    {
+      "__EMPTY_3": "</RfrdDocAmt>"
+    },
+    {
+      "__EMPTY_2": "</Strd>"
+    },
+    {
+      "__EMPTY_1": "</RmtInf>"
+    },
+    {
+      "__EMPTY": "</CdtTrfTxInf>"
+    },
+    {
+      "Legenda:": "</FIToFICstmrCdtTrf>"
+    }
+  ],
+  "Tabela de Domínios": [
+    {
+      "Mensagem ISO 20022": "Message Element",
+      "Domínios para o Brasil": "Código",
+      "__EMPTY_1": "Nome",
+      "__EMPTY_2": "Descrição",
+      "__EMPTY_3": "Comentários",
+      "__EMPTY_4": "Fonte de referência"
+    },
+    {
+      "Mensagem ISO 20022": "<SttlmInf> SettlementInformation",
+      "Domínios para o Brasil": "CLRG",
+      "__EMPTY_1": "ClearingSystem",
+      "__EMPTY_2": "Settlement is done through a payment clearing system.",
+      "__EMPTY_3": "Método de liquidação por intermédio do sistema de pagamentos instantâneos (SPI)",
+      "__EMPTY_4": "SettlementMethod1Code"
+    },
+    {
+      "Mensagem ISO 20022": " <SttlmMtd> SettlementMethod"
+    },
+    {
+      "Mensagem ISO 20022": "<PmtTpInf> PaymentTypeInformation",
+      "Domínios para o Brasil": "HIGH",
+      "__EMPTY_1": "High",
+      "__EMPTY_2": "Priority level is high.",
+      "__EMPTY_3": "Liquidação Prioritária. Deve ser utilizado quando o usuário pagador solicita o envio imediato do pagamento. É necessário salientar que, nesta situação, o SPI considerará o tempo de validação reportado pelo emissor da ordem de pagamento instantâneo, referente à diferença entre o horário de envio da ordem ao SPI e o horário do recebimento da solicitação do usuário pagador, para efeitos de timeout.",
+      "__EMPTY_4": "Priority2Code"
+    },
+    {
+      "Mensagem ISO 20022": " <InstrPrty> InstructionPriority",
+      "Domínios para o Brasil": "NORM",
+      "__EMPTY_1": "Normal",
+      "__EMPTY_2": "Priority level is normal.",
+      "__EMPTY_3": "Liquidação Não Prioritária. Deve ser utilizado quando o usuário pagador faz um Pix Agendado ou quando o tempo máximo para autorização de iniciação da transação pelo participante do usuário pagador é ampliado, nos casos de transações com suspeita de fraude. É necessário salientar que, nesta situação, o SPI desconsiderará o tempo de validação reportado pelo emissor do pagamento para efeitos de timeout."
+    },
+    {
+      "Mensagem ISO 20022": "<ChrgBr> ChargeBearer",
+      "Domínios para o Brasil": "SLEV",
+      "__EMPTY_1": "FollowingServiceLevel",
+      "__EMPTY_2": "Charges are to be applied following the rules agreed in the service level and/or scheme.",
+      "__EMPTY_3": "As cobranças devem ser aplicadas de acordo com as regras acordadas no nível de serviço.",
+      "__EMPTY_4": "ChargeBearerType1Code"
+    },
+    {
+      "Mensagem ISO 20022": " <DbtrAcct> DebtorAccount ",
+      "__EMPTY": "<CdtrAcct> CreditorAccount",
+      "Domínios para o Brasil": "CACC",
+      "__EMPTY_1": "Current",
+      "__EMPTY_2": "Account used to post debits and credits when no specific account has been nominated.",
+      "__EMPTY_3": "Conta corrente de cliente ou conta de instituição participante direto do SPI para liquidação de obrigações e direitos próprios. ",
+      "__EMPTY_4": "ExternalCashAccountType1Code"
+    },
+    {
+      "Mensagem ISO 20022": " <Tp> Type",
+      "__EMPTY": " <Tp> Type",
+      "Domínios para o Brasil": "SLRY",
+      "__EMPTY_1": "Salary",
+      "__EMPTY_2": "Accounts used for salary payments.",
+      "__EMPTY_3": "Conta-Salário. Utilizada somente na opção <DbtrAcct>, pois a conta-salário não recebe créditos de pagamentos."
+    },
+    {
+      "Mensagem ISO 20022": " <Cd> Code",
+      "__EMPTY": "<Cd> Code",
+      "Domínios para o Brasil": "SVGS",
+      "__EMPTY_1": "Savings",
+      "__EMPTY_2": "Account used for savings.",
+      "__EMPTY_3": "Conta de Poupança"
+    },
+    {
+      "__EMPTY": " ",
+      "Domínios para o Brasil": "TRAN",
+      "__EMPTY_1": "TransactingAccount",
+      "__EMPTY_2": "A transacting account is the most basic type of bank account that you can get. The main difference between transaction and cheque accounts is that you usually do not get a cheque book with your transacting account and neither are you offered an overdraft facility.",
+      "__EMPTY_3": "Conta de Pagamento"
+    },
+    {
+      "Mensagem ISO 20022": "<Purp> Purpose ",
+      "Domínios para o Brasil": "IPAY",
+      "__EMPTY_1": "InstantPayments",
+      "__EMPTY_2": "Transaction in which the amount is available to the payee immediately.",
+      "__EMPTY_3": "Compra ou transferência.",
+      "__EMPTY_4": "ExternalPurpose1Code"
+    },
+    {
+      "Mensagem ISO 20022": "<Cd> Code ",
+      "Domínios para o Brasil": "GSCB",
+      "__EMPTY_1": "PurchaseSaleOfGoodsAndServicesWithCashBack",
+      "__EMPTY_2": "Transaction is related to purchase and sale of goods and services with cash back.",
+      "__EMPTY_3": "Pix Troco."
+    },
+    {
+      "Domínios para o Brasil": "OTHR",
+      "__EMPTY_1": "Other",
+      "__EMPTY_2": "Other payment purpose.",
+      "__EMPTY_3": "Pix Saque."
+    }
+  ],
+  "Tabela de Domínios - Prop": [
+    {
+      "Mensagem ISO 20022": "Message Element",
+      "Domínios para o Brasil": "Código",
+      "__EMPTY_1": "Nome",
+      "__EMPTY_2": "Descrição"
+    },
+    {
+      "Mensagem ISO 20022": "<PmtTpInf> PaymentTypeInformation ",
+      "Domínios para o Brasil": "PAGPRI",
+      "__EMPTY_1": "Pagamento Prioritário",
+      "__EMPTY_2": "Pagamento prioritário."
+    },
+    {
+      "Mensagem ISO 20022": "<SvcLvl> ServiceLevel ",
+      "Domínios para o Brasil": "PAGFRD",
+      "__EMPTY_1": "Pagamento com Suspeita de Fraude",
+      "__EMPTY_2": "Pagamento sob análise antifraude."
+    },
+    {
+      "Mensagem ISO 20022": "<Prtry> Proprietary ",
+      "Domínios para o Brasil": "PAGAGD",
+      "__EMPTY_1": "Pagamento Agendado",
+      "__EMPTY_2": "Pagamento agendado."
+    },
+    {
+      "Mensagem ISO 20022": "<MndtRltdInf> MandateRelatedInformation ",
+      "Domínios para o Brasil": "MANU",
+      "__EMPTY_1": "Inserção manual de dados da conta transacional",
+      "__EMPTY_2": "Utilizado quando o pagamento for iniciado por meio de inserção manual dos dados da conta."
+    },
+    {
+      "Mensagem ISO 20022": "<Tp> Type ",
+      "Domínios para o Brasil": "DICT",
+      "__EMPTY_1": "Inserção manual de chave Pix",
+      "__EMPTY_2": "Utilizado quando o pagamento for iniciado por meio de inserção manual de chave Pix."
+    },
+    {
+      "Mensagem ISO 20022": "                 LocalInstrument <LclInstrm>",
+      "Domínios para o Brasil": "INIC",
+      "__EMPTY_1": "Iniciado por meio de serviço de iniciação de transação de pagamento",
+      "__EMPTY_2": "Pix iniciado por meio de serviço de iniciação de transação de pagamento, nos casos em que o participante possui todas as informações do usuário recebedor"
+    },
+    {
+      "Domínios para o Brasil": "QRDN",
+      "__EMPTY_1": "QR code dinâmico ",
+      "__EMPTY_2": "Utilizado quando o pagamento for iniciado por meio de leitura de QR code dinâmico."
+    },
+    {
+      "Mensagem ISO 20022": "<Prtry> Proprietary ",
+      "Domínios para o Brasil": "QRES",
+      "__EMPTY_1": "QR code estático ",
+      "__EMPTY_2": "Utilizado quando o pagamento for iniciado por meio de leitura de QR code estático."
+    },
+    {
+      "Domínios para o Brasil": "QRPG",
+      "__EMPTY_1": "QR Pagador",
+      "__EMPTY_2": "Utilizado quando o pagamento for iniciado por meio de leitura de QR code gerado pelo pagador."
+    },
+    {
+      "Mensagem ISO 20022": "<RmtInf> RemittanceInformation",
+      "Domínios para o Brasil": "VLDN",
+      "__EMPTY_1": "Valor do recurso em espécie disponibilizado",
+      "__EMPTY_2": "Recurso em espécie disponibilizado ao usuário pagador."
+    },
+    {
+      "Mensagem ISO 20022": "<Strd>"
+    },
+    {
+      "Mensagem ISO 20022": "<RfrdDocAmt>"
+    },
+    {
+      "Mensagem ISO 20022": "<AdjstmntAmtAndRsn>",
+      "Domínios para o Brasil": "VLCP",
+      "__EMPTY_1": "Valor da compra",
+      "__EMPTY_2": "Valor da compra nas transações do tipo Pix Troco."
+    },
+    {
+      "Mensagem ISO 20022": "<Rsn> Reason"
+    },
+    {
+      "Mensagem ISO 20022": "<RmtInf> RemittanceInformation",
+      "Domínios para o Brasil": "AGPSS",
+      "__EMPTY_1": "Agente Facilitador de Serviço de Saque",
+      "__EMPTY_2": "Pix Saque ou Pix Troco com ressarcimento de custos operacionais (RCO) de participante facilitador de serviço de saque (FSS) que facilita diretamente o serviço de saque."
+    },
+    {
+      "Mensagem ISO 20022": "<Strd>"
+    },
+    {
+      "Mensagem ISO 20022": "<RfrdDocInf>",
+      "Domínios para o Brasil": "AGTEC",
+      "__EMPTY_1": "Agente Estabelecimento Comercial",
+      "__EMPTY_2": "Pix Saque ou Pix Troco com ressarcimento de custos operacionais (RCO) de agente de saque que é um estabelecimento comercial."
+    },
+    {
+      "Mensagem ISO 20022": "<Tp>"
+    },
+    {
+      "Mensagem ISO 20022": "<CdOrPrtry>",
+      "Domínios para o Brasil": "AGTOT",
+      "__EMPTY_1": "Agente Outra Espécie de Pessoa Jurídica ou Correspondente no País",
+      "__EMPTY_2": "Pix Saque ou Pix Troco com ressarcimento de custos operacionais (RCO) de agente de saque que é outra espécie de pessoa jurídica ou correspondente no País"
+    },
+    {
+      "Mensagem ISO 20022": "<Prtry> Proprietary"
+    }
+  ]
+}
